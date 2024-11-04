@@ -7,12 +7,16 @@ export class NasaImage extends LitElement {
     super();
     this.title = '';
     this.source = '';
+    this.alt = '';
+    this.secondaryCreator = '';
   }
 
   static get properties() {
     return {
         source: { type: String },
         title: { type: String },
+        alt: { type: String },
+        secondaryCreator: { type: String, attribute: "secondary-creator" }
     };
   }
 
@@ -22,18 +26,24 @@ export class NasaImage extends LitElement {
 
     .image {
     display: inline-block;
+    background-color: var(--ddd-theme-default-beaverBlue);
+    max-width: 240px;
+    }
+
+    .image:hover {
+      background-color: var(--ddd-theme-default-slateGray);
     }
 
     .image div {
-    max-width: 200px;
+    max-width: 240px;
     font-size: 16px;
     font-weight: bold;
     }
 
     .image img {
     display: block;
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: auto;
     }
 
     `];
@@ -41,10 +51,13 @@ export class NasaImage extends LitElement {
 
   render() {
     return html`
-    <div class="image">
-        <img src="${this.source}" />
-        <div>${this.title}</div>
-    </div>
+    <a href="${this.source}" target="_blank">
+      <div class="image">
+          <img src="${this.source}" alt="${this.alt}" />
+          <div>${this.title}</div>
+          <div>${this.secondaryCreator}</div>
+      </div>
+    </a>
     `;
   }
   static get tag() {
